@@ -7,6 +7,7 @@ import { InteractiveMapSection } from './components/InteractiveMapSection';
 import { AnalyticsAndPersonalization } from './components/AnalyticsAndPersonalization';
 import { HistoryAndSharingSection } from './components/HistoryAndSharingSection';
 import { AccountSecuritySection } from './components/AccountSecuritySection';
+import { FaqSection } from './components/FaqSection';
 import { DownloadCTAAndFooter } from './components/DownloadCTAAndFooter';
 
 export function App() {
@@ -30,6 +31,7 @@ export function App() {
               <AnalyticsAndPersonalization />
               <HistoryAndSharingSection />
               <AccountSecuritySection />
+              <FaqSection />
             </main>
             <DownloadCTAAndFooter />
           </div>

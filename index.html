@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- Primary SEO Meta Tags -->
+    <!-- Primary Technical SEO Meta Tags -->
     <title>HealthTik — Track What Your Body Is Telling You | Personal Health Symptom Tracker</title>
     <meta
       name="title"
@@ -12,24 +12,46 @@
     />
     <meta
       name="description"
-      content="HealthTik is a personal health symptom tracking platform. Log symptoms in seconds, customize your symptom library, explore your chronological health history, map symptoms geographically, and turn health data into shareable insights."
+      content="HealthTik is a personal health symptom tracking platform. Log symptoms in seconds, build a custom symptom library, explore your chronological health history, map symptoms geographically, and turn health data into doctor-ready insights."
     />
     <meta
       name="keywords"
-      content="HealthTik, symptom tracker app, personal health journal, symptom log, health map, symptom analytics, medical history tracker, chronic symptom tracking, share health reports with doctor, iOS health app, Android health app"
+      content="HealthTik, symptom tracker app, personal health symptom tracker, daily symptom journal, health map, geographical symptom tracking, symptom intensity tracker, chronic illness symptom log, health analytics app, share symptom history with doctor, iOS health app, Android health app"
     />
     <meta name="author" content="HealthTik" />
+    <meta name="application-name" content="HealthTik" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="HealthTik" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Search Engine Crawler Directives -->
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <link rel="canonical" href="https://nandiraju.github.io/healthtick/" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#05080F" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="bingbot" content="index, follow" />
+    <!-- Optional: Add your Google Search Console verification code below -->
+    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> -->
 
-    <!-- Open Graph / Facebook / LinkedIn / iMessage -->
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href="https://nandiraju.github.io/healthtick/" />
+    <link rel="alternate" hreflang="en" href="https://nandiraju.github.io/healthtick/" />
+    <link rel="alternate" hreflang="x-default" href="https://nandiraju.github.io/healthtick/" />
+
+    <!-- Icons, Manifest & Theme Color -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./favicon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#F4F7FB" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#04070E" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph / Facebook / LinkedIn / iMessage / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nandiraju.github.io/healthtick/" />
     <meta property="og:site_name" content="HealthTik" />
@@ -40,9 +62,15 @@
     />
     <meta
       property="og:description"
-      content="Record, organize, map, and understand your health symptoms over time. Build a personalized symptom library, visualize geographical patterns, and share structured reports with healthcare professionals."
+      content="Record, organize, geographically map, and understand your health symptoms over time. Turn personal health records into clear, doctor-ready insights."
     />
-    <meta property="og:image" content="https://nandiraju.github.io/healthtick/favicon.svg" />
+    <meta property="og:image" content="https://nandiraju.github.io/healthtick/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="HealthTik Personal Health Symptom Tracking Platform — Symptom Tracking, Health Map, and Visual Analytics"
+    />
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -55,9 +83,13 @@
       name="twitter:description"
       content="Log symptoms in seconds, visualize geographical patterns on an interactive Health Map, and turn personal health records into doctor-ready insights."
     />
-    <meta name="twitter:image" content="https://nandiraju.github.io/healthtick/favicon.svg" />
+    <meta name="twitter:image" content="https://nandiraju.github.io/healthtick/og-image.svg" />
+    <meta
+      name="twitter:image:alt"
+      content="HealthTik Personal Health Symptom Tracking Platform"
+    />
 
-    <!-- Performance: Preconnect Google Fonts -->
+    <!-- Core Web Vitals Performance: Preconnect & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -80,9 +112,9 @@
     </script>
 
     <!-- Google Analytics 4 (GA4) Ready-to-Activate Tag -->
-    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics 4 Measurement ID -->
+    <!-- Paste your GA4 Measurement ID (e.g. 'G-XXXXXXXXXX') below to activate analytics -->
     <script>
-      window.GA_MEASUREMENT_ID = ''; // e.g. 'G-XXXXXXXXXX'
+      window.GA_MEASUREMENT_ID = '';
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         window.dataLayer.push(arguments);
@@ -98,18 +130,69 @@
       }
     </script>
 
-    <!-- Structured Data (JSON-LD) for Rich Search Results -->
+    <!-- Comprehensive JSON-LD Structured Data (@graph) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://nandiraju.github.io/healthtick/#organization",
+            "name": "HealthTik",
+            "url": "https://nandiraju.github.io/healthtick/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://nandiraju.github.io/healthtick/favicon.svg"
+            }
+          },
           {
             "@type": "WebSite",
             "@id": "https://nandiraju.github.io/healthtick/#website",
             "url": "https://nandiraju.github.io/healthtick/",
             "name": "HealthTik",
             "description": "HealthTik — A Personal Health Symptom Tracking Platform",
+            "publisher": {
+              "@id": "https://nandiraju.github.io/healthtick/#organization"
+            },
             "inLanguage": "en-US"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://nandiraju.github.io/healthtick/#webpage",
+            "url": "https://nandiraju.github.io/healthtick/",
+            "name": "HealthTik — Track What Your Body Is Telling You",
+            "isPartOf": {
+              "@id": "https://nandiraju.github.io/healthtick/#website"
+            },
+            "about": {
+              "@id": "https://nandiraju.github.io/healthtick/#app"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://nandiraju.github.io/healthtick/og-image.svg",
+              "width": 1200,
+              "height": 630
+            },
+            "breadcrumb": {
+              "@id": "https://nandiraju.github.io/healthtick/#breadcrumb"
+            },
+            "speakable": {
+              "@type": "SpeakableSpecification",
+              "cssSelector": ["h1", "h2", "#faq-heading"]
+            },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://nandiraju.github.io/healthtick/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://nandiraju.github.io/healthtick/"
+              }
+            ]
           },
           {
             "@type": "MobileApplication",
@@ -118,8 +201,9 @@
             "operatingSystem": "iOS, Android",
             "applicationCategory": "HealthApplication",
             "description": "HealthTik helps individuals record, organize, visualize, and understand their health symptoms over time with personalized symptom tracking, geographical mapping, historical records, visual analytics, and exportable reports.",
+            "screenshot": "https://nandiraju.github.io/healthtick/og-image.svg",
             "featureList": [
-              "Symptom Tracking with intensity, notes, timestamps, and location capture",
+              "Symptom Tracking with intensity, notes, timestamps, and geographical location capture",
               "Personalized custom symptom library management",
               "Complete searchable and filterable chronological symptom history",
               "Interactive Health Map for geographical symptom pattern visualization",
@@ -135,13 +219,22 @@
           },
           {
             "@type": "FAQPage",
+            "@id": "https://nandiraju.github.io/healthtick/#faq",
             "mainEntity": [
               {
                 "@type": "Question",
                 "name": "What is HealthTik?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "HealthTik is a personal health symptom tracking platform that helps individuals record, organize, geographically map, visualize, and share their health symptoms over time."
+                  "text": "HealthTik is a personal health symptom tracking platform that helps individuals record, organize, geographically map, visualize, and understand their health symptoms over time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does HealthTik help track health symptoms?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "HealthTik lets you log individual symptoms as they occur, record symptom intensity or severity, add personal notes and observations, and capture the date, time, and geographical location of each occurrence."
                 }
               },
               {
@@ -149,7 +242,15 @@
                 "name": "Can I customize the symptoms I track in HealthTik?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. HealthTik lets you build a custom library of health symptoms where you can add, edit, and remove symptoms to tailor the tracking experience to your individual needs."
+                  "text": "Yes. HealthTik includes personalized symptom management so you can build your own custom library of health symptoms—adding, editing, and removing symptoms to match your individual needs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the Health Map feature work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Health Map geographically visualizes where your symptoms were recorded on an interactive map, helping you identify location-based patterns and explore individual symptom records directly through map markers."
                 }
               },
               {
@@ -157,7 +258,15 @@
                 "name": "Can I share my HealthTik symptom history with my doctor?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes. HealthTik allows you to organize and export symptom records and visual health reports to make your documented health history accessible for discussions with healthcare professionals."
+                  "text": "Yes. HealthTik organizes your chronological symptom records and visual analytics reports so you can export and share a structured, documented health history for clearer discussions with healthcare professionals."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does HealthTik manage my personal account and history?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "HealthTik provides individual user accounts with secure login and logout, keeping your personalized symptom library and complete chronological health history organized under your own account."
                 }
               }
             ]
@@ -166,8 +275,30 @@
       }
     </script>
   </head>
-  <body class="bg-[#F8FAFC] text-[#0B1220] antialiased transition-colors duration-300 dark:bg-[#05080F] dark:text-[#F4F7FB]">
+  <body class="bg-[#F4F7FB] text-[#0B1220] antialiased transition-colors duration-300 dark:bg-[#04070E] dark:text-[#F4F7FB]">
     <div id="root"></div>
+
+    <!-- Semantic HTML Fallback for Non-JS Crawlers & Instant Indexing -->
+    <noscript>
+      <main style="max-width: 800px; margin: 40px auto; padding: 24px; font-family: system-ui, sans-serif;">
+        <h1>HealthTik — Track What Your Body Is Telling You</h1>
+        <p>
+          HealthTik is a personal health symptom tracking platform that helps individuals record,
+          organize, geographically map, visualize, and share their health symptoms over time.
+        </p>
+        <h2>Core Features</h2>
+        <ul>
+          <li><strong>Symptom Tracking — Track What Your Body Is Telling You:</strong> Log individual health symptoms, intensity, notes, timestamps, and geographical location.</li>
+          <li><strong>Personalization — Your Symptoms, Your Way:</strong> Create, edit, and remove custom symptoms in your personal library.</li>
+          <li><strong>Health History — Your Health Journey, Documented:</strong> Review chronological records, notes, timestamps, frequency, and intensity shifts.</li>
+          <li><strong>Health Map — See Your Health Geographically:</strong> Visualize recorded symptoms on an interactive map to identify geographical patterns.</li>
+          <li><strong>Reports &amp; Analytics — Turn Health Data Into Insights:</strong> Analyze frequency trends, monitor intensity trajectories, and export reports.</li>
+          <li><strong>Sharing — Make Your Health History Accessible:</strong> Export and share structured symptom records for discussions with healthcare professionals.</li>
+          <li><strong>User Account Management:</strong> Secure login and logout with individual accounts and personal symptom history access.</li>
+        </ul>
+      </main>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
