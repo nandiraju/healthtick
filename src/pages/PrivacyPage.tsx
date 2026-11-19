@@ -5,7 +5,11 @@ import { Navbar } from '../components/Navbar';
 import { DownloadCTAAndFooter } from '../components/DownloadCTAAndFooter';
 import { SUPPORT_EMAIL, SITE_URL } from '../constants';
 
-const DELETION_WINDOW_DAYS = 30;
+const REQUEST_RECORD_DAYS = 90;
+const SUPPORT_REPLY_DAYS = 7;
+const PLAY_APP_NAME = 'HealthTik: Symptom Tracker';
+const DEVELOPER_NAME = 'Srikanth Nandiraju';
+const ANDROID_PACKAGE = 'me.healthtik.app';
 
 interface PolicySection {
   title: string;
@@ -20,23 +24,25 @@ const SECTIONS: PolicySection[] = [
   {
     title: '1. Overview & Commitment to Your Privacy',
     body: [
-      'HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application for iOS (App ID: 1076611952) and Android, and the website at health.cend.in.',
-      'This Privacy Policy explains what information the HealthTik app collects, how it is used, how it is protected, and the choices you have over your data.',
+      `HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application for iOS (Apple App Store, App ID: 1076611952), the HealthTik mobile application for Android (Google Play, package ${ANDROID_PACKAGE}), and the website at health.cend.in.`,
+      'This Privacy Policy explains what information the HealthTik apps store, where it is kept, how it is used, how it is protected, and the choices you have over your data.',
     ],
   },
   {
-    title: '2. Information We Collect',
+    title: '2. Information the App Stores',
     body: [
+      'Stored on your device only: Everything you enter in HealthTik is saved locally on your phone or tablet. It is not sent to us or to any server we operate, and we cannot see it.',
       'Health & Symptom Data: Symptoms you create or log, severity/intensity ratings, personal notes and observations, timestamps, and your personalized symptom library.',
-      'Location Data (Optional): If you grant location permissions on your device, HealthTik records the geographical location associated with a symptom entry so you can visualize patterns on your personal Health Map. You may disable location access at any time in your device settings.',
-      'Account Data: Basic account credentials (such as your email address and authentication identifiers) required to provide secure individual user login, logout, and access to your personal symptom history.',
-      'Analytics & Diagnostics: We may collect anonymized crash logs, performance diagnostics, and aggregate website usage analytics (such as Google Analytics on health.cend.in) to improve app stability and user experience. Health symptom content and personal notes are never included in marketing or advertising analytics.',
+      'Location Data (Optional): If you grant location permission, HealthTik saves the location of a symptom entry on your device so you can see patterns on your personal Health Map. Depending on the permission you grant, this may be your precise or approximate location. You may disable location access at any time in your device settings on iOS or Android.',
+      'Account Data: The name, email address, and password you choose when creating your HealthTik account. These are used only to sign you in on your device.',
+      'No Tracking: The HealthTik iOS and Android apps do not collect crash logs, performance diagnostics, advertising identifiers, or usage analytics, and they contain no advertising or analytics SDKs. The website health.cend.in does not use analytics or tracking cookies.',
+      'Map Display: The Health Map is drawn using the map service on your device (Apple Maps on iOS, Google Maps on Android). To load map imagery, that service receives the map area being viewed. Your symptom records and notes are not sent to it.',
     ],
   },
   {
     title: '3. How We Use Your Information',
     body: [
-      'We use your information strictly to deliver and improve HealthTik’s core features: recording and organizing symptoms, displaying your chronological health history, rendering your personal Health Map, generating visual health reports and trends, and enabling you to export or share your records when you choose to do so.',
+      'Your information is used on your device, strictly to deliver HealthTik’s core features: recording and organizing symptoms, displaying your chronological health history, rendering your personal Health Map, generating visual health reports and trends, and enabling you to export or share your records when you choose to do so.',
       'HealthTik is a personal health tracking tool and does not provide medical advice, diagnosis, or treatment.',
     ],
   },
@@ -57,44 +63,44 @@ const SECTIONS: PolicySection[] = [
   {
     title: '6. Data Security',
     body: [
-      'We use industry-standard technical and organizational safeguards, including encrypted data transmission (HTTPS/TLS) and isolated individual user accounts, to help protect your personal and health information against unauthorized access, loss, or misuse.',
+      'Your records are kept in the app’s private storage on your device, and your sign-in details are kept in the device’s secure storage. They are protected by your device’s own security, such as your passcode or biometric lock. Because your health data is not transmitted to us, we hold no copy that could be accessed or disclosed.',
+      'If you have device backup turned on (iCloud on iOS, Google backup on Android), your device may include app data in a backup held in your own Apple or Google account, under your control.',
     ],
   },
   {
     title: '7. Data Retention & Account Deletion',
-    id: 'account-deletion',
+    id: 'delete-account',
     body: [
-      'This section applies to the HealthTik app, published under the name "HealthTik" on Google Play and the Apple App Store.',
-      'We retain your personal symptom history for as long as your account remains active. You may delete individual symptom entries within the app at any time. You can also request deletion of your HealthTik account and all associated data by following these steps:',
+      `App: "${PLAY_APP_NAME}" (shown as HealthTik on the Apple App Store). Developer: ${DEVELOPER_NAME}.`,
+      'Your HealthTik account and all of its data live only on your device and stay there until you delete them. We keep no copy. To delete your account and data:',
     ],
     steps: [
-      `Send an email to ${SUPPORT_EMAIL} from the email address registered to your HealthTik account.`,
-      'Use the subject line "Delete my HealthTik account".',
-      'We will reply to confirm that the request came from the account owner.',
-      `Once confirmed, we permanently delete your account and associated data within ${DELETION_WINDOW_DAYS} days and email you when deletion is complete.`,
+      'Android: open Settings → Apps → HealthTik → Storage → Clear storage (or Clear data). iOS: press and hold the HealthTik icon → Remove App → Delete App.',
+      'Uninstalling the app on either platform has the same effect.',
+      'Your account and data are deleted immediately. There is no waiting period.',
+      `Need help, or want written confirmation? Email ${SUPPORT_EMAIL} from the email address registered to your HealthTik account with the subject line "Delete my HealthTik account". We reply within ${SUPPORT_REPLY_DAYS} days.`,
     ],
     lists: [
       {
-        heading: 'Data that is deleted',
+        heading: 'What is deleted',
         items: [
-          'Your account profile and login credentials (email address and authentication identifiers).',
-          'All symptom entries, including severity/intensity ratings, timestamps, and personal notes.',
-          'Your personalized symptom library.',
-          'All location data attached to symptom entries and shown on your Health Map.',
-          'Reports and analytics generated from your records.',
+          'Your account: name, email address, and password.',
+          'Your symptom history: every entry with its severity rating and timestamp, plus your personalized symptom library.',
+          'Your notes on symptom entries.',
+          'Your location data attached to symptom entries.',
         ],
       },
       {
-        heading: 'Data that may be kept',
+        heading: 'What is kept, and for how long',
         items: [
-          'Anonymized, aggregate crash and usage diagnostics that cannot be linked back to you or your account.',
-          'Records we are legally required to retain, such as the deletion request itself, kept only for as long as the law requires.',
+          'By us: no account, health, symptom, note, or location data, because we never receive it.',
+          `If you email us, we keep that email exchange for up to ${REQUEST_RECORD_DAYS} days, then delete it.`,
+          'By you: a device backup in your own Apple or Google account may still contain app data until you delete that backup.',
         ],
       },
     ],
     after: [
-      `Retention period: after your request is confirmed, your account and personal data are removed within ${DELETION_WINDOW_DAYS} days. We do not keep your health or symptom data beyond that period.`,
-      'Deletion is permanent and cannot be undone. Copies of reports you previously exported or shared outside HealthTik are not affected, because they are no longer under our control.',
+      'Deletion is permanent and cannot be undone. Reports you already exported or shared outside HealthTik are not affected.',
     ],
   },
   {
@@ -161,12 +167,13 @@ export function PrivacyPage() {
                   HealthTik Privacy Policy
                 </h1>
                 <p className="mt-2 font-mono-tech text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Effective Date: November 19, 2026 · Applies to the HealthTik mobile app (iOS & Android) & health.cend.in
+                  Effective Date: November 19, 2026 · Applies to the HealthTik iOS app, the HealthTik Android app & health.cend.in
                 </p>
 
                 <div className="mt-8 space-y-8 border-t border-slate-900/10 pt-8 dark:border-white/[0.08]">
                   {SECTIONS.map((sec) => (
                     <section key={sec.title} id={sec.id} className="scroll-mt-28">
+                      {sec.id === 'delete-account' && <span id="account-deletion" />}
                       <h2 className="text-lg font-bold text-slate-950 dark:text-white">
                         {sec.title}
                       </h2>
