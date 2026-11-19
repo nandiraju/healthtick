@@ -9,7 +9,7 @@ const SECTIONS = [
   {
     title: '1. Overview & Commitment to Your Privacy',
     body: [
-      'HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application (iOS App ID: 1076611952) and website at healthtik.cend.in.',
+      'HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application (iOS App ID: 1076611952) and website at health.cend.in.',
       'This Privacy Policy explains what information the HealthTik app collects, how it is used, how it is protected, and the choices you have over your data.',
     ],
   },
@@ -19,7 +19,7 @@ const SECTIONS = [
       'Health & Symptom Data: Symptoms you create or log, severity/intensity ratings, personal notes and observations, timestamps, and your personalized symptom library.',
       'Location Data (Optional): If you grant location permissions on your device, HealthTik records the geographical location associated with a symptom entry so you can visualize patterns on your personal Health Map. You may disable location access at any time in your iOS Settings.',
       'Account Data: Basic account credentials (such as your email address and authentication identifiers) required to provide secure individual user login, logout, and access to your personal symptom history.',
-      'Analytics & Diagnostics: We may collect anonymized crash logs, performance diagnostics, and aggregate website usage analytics (such as Google Analytics on healthtik.cend.in) to improve app stability and user experience. Health symptom content and personal notes are never included in marketing or advertising analytics.',
+      'Analytics & Diagnostics: We may collect anonymized crash logs, performance diagnostics, and aggregate website usage analytics (such as Google Analytics on health.cend.in) to improve app stability and user experience. Health symptom content and personal notes are never included in marketing or advertising analytics.',
     ],
   },
   {
@@ -120,7 +120,7 @@ export function PrivacyPage() {
                   HealthTik Privacy Policy
                 </h1>
                 <p className="mt-2 font-mono-tech text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Effective Date: November 19, 2026 · Applies to HealthTik iOS App & healthtik.cend.in
+                  Effective Date: November 19, 2026 · Applies to HealthTik iOS App & health.cend.in
                 </p>
 
                 <div className="mt-8 space-y-8 border-t border-slate-900/10 pt-8 dark:border-white/[0.08]">

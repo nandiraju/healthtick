@@ -16,4 +16,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://healthtik.cend.in/sitemap.xml
+Sitemap: https://health.cend.in/sitemap.xml
