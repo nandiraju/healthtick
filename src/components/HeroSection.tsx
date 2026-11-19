@@ -5,7 +5,8 @@ import {
   Sparkles,
   ArrowRight,
   Activity,
-  CheckCircle2,
+  BarChart3,
+  FileText,
   ShieldCheck,
 } from 'lucide-react';
 import { BioSignalCanvas } from './BioSignalCanvas';
@@ -13,7 +14,7 @@ import { IPhoneFrame } from './IPhoneFrame';
 import { trackEvent } from '../utils/analytics';
 
 export function HeroSection() {
-  // Smooth 120fps 3D pointer tilt for the iPhone showcase
+  // Smooth 120fps 3D pointer tilt for the unobstructed iPhone showcase
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { stiffness: 160, damping: 24, mass: 0.4 });
@@ -41,7 +42,7 @@ export function HeroSection() {
       <div className="bg-bio-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-8">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Left Editorial Column */}
           <div className="lg:col-span-7">
             <motion.div
@@ -108,46 +109,55 @@ export function HeroSection() {
               </a>
             </motion.div>
 
-            {/* Key Positioning Highlights */}
+            {/* Structured 3-Card Liquid Glass Value Strip (Meaningful Real Estate, Zero Overlap) */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.75, delay: 0.3 }}
-              className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-slate-900/10 pt-6 dark:border-white/[0.08]"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="mt-10 grid gap-3 sm:grid-cols-3"
             >
-              <div>
-                <div className="font-mono-tech text-lg font-bold text-slate-950 sm:text-xl dark:text-white">
-                  Personalized
-                </div>
-                <div className="mt-0.5 text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Custom symptom library
-                </div>
-              </div>
-              <div>
-                <div className="font-mono-tech text-lg font-bold text-teal-600 sm:text-xl dark:text-[#2EF2C5]">
-                  Geo-Mapped
-                </div>
-                <div className="mt-0.5 text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Visual health map
-                </div>
-              </div>
-              <div>
-                <div className="font-mono-tech text-lg font-bold text-slate-950 sm:text-xl dark:text-white">
-                  Doctor-Ready
-                </div>
-                <div className="mt-0.5 text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Exportable health history
-                </div>
-              </div>
+              {[
+                {
+                  icon: MapPin,
+                  title: 'Location Context',
+                  desc: 'Auto-tagged geographical patterns',
+                  accent: 'text-teal-600 dark:text-[#2EF2C5]',
+                },
+                {
+                  icon: BarChart3,
+                  title: 'Visual Analytics',
+                  desc: 'Frequency & severity trends',
+                  accent: 'text-indigo-600 dark:text-[#7C6BFF]',
+                },
+                {
+                  icon: FileText,
+                  title: 'Doctor-Ready',
+                  desc: 'Structured exportable history',
+                  accent: 'text-sky-600 dark:text-[#38BDF8]',
+                },
+              ].map((card) => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.title} className="glass-panel rounded-2xl p-4">
+                    <Icon className={`h-4 w-4 ${card.accent}`} />
+                    <div className="mt-2.5 text-xs font-bold text-slate-950 dark:text-white">
+                      {card.title}
+                    </div>
+                    <p className="mt-0.5 text-[11px] leading-snug text-slate-500 dark:text-[#8A99B2]">
+                      {card.desc}
+                    </p>
+                  </div>
+                );
+              })}
             </motion.div>
           </div>
 
-          {/* Right Column: Pure Visual App Showcase inside True-Ratio iPhone */}
+          {/* Right Column: Clean, Unobstructed 19.5:9 iPhone Showcase */}
           <motion.div
-            initial={{ opacity: 0, y: 28, scale: 0.97 }}
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex justify-center lg:col-span-5"
+            transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            className="flex justify-center lg:col-span-5"
             style={{ perspective: 1200 }}
             onMouseMove={handlePhoneMove}
             onMouseLeave={handlePhoneLeave}
@@ -156,57 +166,16 @@ export function HeroSection() {
               style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
               className="relative will-change-transform"
             >
-              {/* Soft Ambient Aura */}
+              {/* Soft Ambient Aura Behind Device */}
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-8 rounded-[3.5rem] bg-gradient-to-tr from-teal-400/20 via-indigo-400/15 to-sky-400/20 blur-3xl dark:from-[#2EF2C5]/22 dark:via-[#7C6BFF]/20 dark:to-[#FF6B6B]/18"
               />
 
-              {/* Floating Editorial Callout Pill — Left */}
-              <motion.div
-                initial={{ opacity: 0, x: -18 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.45, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="glass-panel pointer-events-none absolute top-24 -left-14 z-30 hidden items-center gap-2.5 rounded-2xl px-3.5 py-2.5 sm:flex"
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-teal-500/15 text-teal-600 dark:text-[#2EF2C5]">
-                  <MapPin className="h-4 w-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold text-slate-900 dark:text-white">
-                    Location Tagged
-                  </div>
-                  <div className="font-mono-tech text-[9px] text-slate-500 dark:text-[#8A99B2]">
-                    Auto-captured context
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Editorial Callout Pill — Right */}
-              <motion.div
-                initial={{ opacity: 0, x: 18 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.55, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="glass-panel pointer-events-none absolute -right-12 bottom-28 z-30 hidden items-center gap-2.5 rounded-2xl px-3.5 py-2.5 sm:flex"
-              >
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-[#7C6BFF]">
-                  <CheckCircle2 className="h-4 w-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold text-slate-900 dark:text-white">
-                    Doctor-Ready
-                  </div>
-                  <div className="font-mono-tech text-[9px] text-slate-500 dark:text-[#8A99B2]">
-                    Structured reports
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Authentic 19.5:9 iPhone Showcase */}
               <IPhoneFrame>
                 <div className="flex h-full flex-col justify-between pt-1 pb-2">
-                  {/* App Top Bar */}
                   <div>
+                    {/* App Top Bar */}
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-mono-tech text-[9px] font-semibold uppercase tracking-widest text-teal-600 dark:text-[#2EF2C5]">
@@ -246,7 +215,7 @@ export function HeroSection() {
                     </div>
 
                     {/* Visual Trend Preview Card */}
-                    <div className="mt-3 rounded-2xl border border-slate-200/80 bg-white p-3.5 shadow-xs dark:border-white/[0.08] dark:bg-white/[0.04]">
+                    <div className="glass-card-inner mt-3 rounded-2xl p-3.5">
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] font-bold text-slate-800 dark:text-white">
                           Weekly Intensity
@@ -282,7 +251,7 @@ export function HeroSection() {
                       ].map((row) => (
                         <div
                           key={row.name}
-                          className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-white px-3 py-2 dark:border-white/[0.06] dark:bg-white/[0.03]"
+                          className="glass-card-inner flex items-center justify-between rounded-xl px-3 py-2"
                         >
                           <div className="flex items-center gap-2">
                             <span
