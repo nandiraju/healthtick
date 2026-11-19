@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface Particle {
   x: number;
@@ -7,12 +8,15 @@ interface Particle {
   vy: number;
   radius: number;
   alpha: number;
-  hue: string;
+  colorIdx: number;
   phase: number;
 }
 
 export function BioSignalCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,18 +43,17 @@ export function BioSignalCanvas() {
       canvas.height = Math.max(1, Math.floor(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const targetCount = width < 768 ? 28 : 54;
+      const targetCount = width < 768 ? 24 : 46;
       particles.length = 0;
-      const palette = ['#2EF2C5', '#7C6BFF', '#38BDF8', '#FF6B6B'];
       for (let i = 0; i < targetCount; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.22,
-          radius: 1.1 + Math.random() * 2.1,
-          alpha: 0.18 + Math.random() * 0.45,
-          hue: palette[i % palette.length],
+          vx: (Math.random() - 0.5) * 0.26,
+          vy: (Math.random() - 0.5) * 0.2,
+          radius: 1.2 + Math.random() * 2.0,
+          alpha: 0.2 + Math.random() * 0.35,
+          colorIdx: i % 4,
           phase: Math.random() * Math.PI * 2,
         });
       }
@@ -85,54 +88,66 @@ export function BioSignalCanvas() {
         return;
       }
 
-      // Delta-time normalization guarantees identical fluid velocity at 60Hz, 120Hz, and 144Hz
       const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
-      if (!prefersReducedMotion) {
-        elapsed += dt;
-      }
+      if (!prefersReducedMotion) elapsed += dt;
 
-      // Smooth spring lerp for pointer parallax
       const lerpFactor = 1 - Math.exp(-5.5 * dt);
       pointer.x += (pointer.tx - pointer.x) * lerpFactor;
       pointer.y += (pointer.ty - pointer.y) * lerpFactor;
 
+      const isDark = themeRef.current === 'dark';
       ctx.clearRect(0, 0, width, height);
 
-      // Bioluminescent ambient radial glows
-      const cx1 = width * (0.28 + (pointer.x - 0.5) * 0.12);
-      const cy1 = height * (0.35 + (pointer.y - 0.5) * 0.12);
+      // Ambient atmospheric glows tuned per theme
+      const cx1 = width * (0.26 + (pointer.x - 0.5) * 0.1);
+      const cy1 = height * (0.32 + (pointer.y - 0.5) * 0.1);
       const grad1 = ctx.createRadialGradient(cx1, cy1, 0, cx1, cy1, Math.max(width, height) * 0.48);
-      grad1.addColorStop(0, 'rgba(46, 242, 197, 0.12)');
-      grad1.addColorStop(0.5, 'rgba(124, 107, 255, 0.05)');
-      grad1.addColorStop(1, 'rgba(5, 8, 15, 0)');
+      if (isDark) {
+        grad1.addColorStop(0, 'rgba(46, 242, 197, 0.12)');
+        grad1.addColorStop(0.5, 'rgba(124, 107, 255, 0.05)');
+        grad1.addColorStop(1, 'rgba(5, 8, 15, 0)');
+      } else {
+        grad1.addColorStop(0, 'rgba(13, 148, 136, 0.10)');
+        grad1.addColorStop(0.55, 'rgba(79, 70, 229, 0.045)');
+        grad1.addColorStop(1, 'rgba(248, 250, 252, 0)');
+      }
       ctx.fillStyle = grad1;
       ctx.fillRect(0, 0, width, height);
 
-      const cx2 = width * (0.76 - (pointer.x - 0.5) * 0.1);
-      const cy2 = height * (0.58 - (pointer.y - 0.5) * 0.1);
-      const grad2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, Math.max(width, height) * 0.44);
-      grad2.addColorStop(0, 'rgba(124, 107, 255, 0.14)');
-      grad2.addColorStop(0.55, 'rgba(255, 107, 107, 0.04)');
-      grad2.addColorStop(1, 'rgba(5, 8, 15, 0)');
+      const cx2 = width * (0.78 - (pointer.x - 0.5) * 0.09);
+      const cy2 = height * (0.58 - (pointer.y - 0.5) * 0.09);
+      const grad2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, Math.max(width, height) * 0.42);
+      if (isDark) {
+        grad2.addColorStop(0, 'rgba(124, 107, 255, 0.14)');
+        grad2.addColorStop(1, 'rgba(5, 8, 15, 0)');
+      } else {
+        grad2.addColorStop(0, 'rgba(56, 189, 248, 0.11)');
+        grad2.addColorStop(1, 'rgba(248, 250, 252, 0)');
+      }
       ctx.fillStyle = grad2;
       ctx.fillRect(0, 0, width, height);
 
-      // 3 Harmonic Biometric Signal Ribbons (ECG / Vital Wave inspired)
-      const waveConfigs = [
-        { amp: 26, freq: 0.0055, speed: 0.9, yOff: 0.56, color: 'rgba(46, 242, 197, 0.22)', lineWidth: 1.5 },
-        { amp: 18, freq: 0.0078, speed: -0.65, yOff: 0.61, color: 'rgba(124, 107, 255, 0.20)', lineWidth: 1.2 },
-        { amp: 12, freq: 0.0105, speed: 1.2, yOff: 0.65, color: 'rgba(255, 107, 107, 0.12)', lineWidth: 1.0 },
-      ];
+      // 3 Harmonic Biometric Signal Ribbons
+      const waveConfigs = isDark
+        ? [
+            { amp: 24, freq: 0.0055, speed: 0.9, yOff: 0.58, color: 'rgba(46, 242, 197, 0.22)', lineWidth: 1.5 },
+            { amp: 17, freq: 0.0078, speed: -0.65, yOff: 0.63, color: 'rgba(124, 107, 255, 0.18)', lineWidth: 1.2 },
+            { amp: 12, freq: 0.0105, speed: 1.2, yOff: 0.67, color: 'rgba(255, 107, 107, 0.11)', lineWidth: 1.0 },
+          ]
+        : [
+            { amp: 24, freq: 0.0055, speed: 0.9, yOff: 0.58, color: 'rgba(13, 148, 136, 0.18)', lineWidth: 1.5 },
+            { amp: 17, freq: 0.0078, speed: -0.65, yOff: 0.63, color: 'rgba(79, 70, 229, 0.14)', lineWidth: 1.2 },
+            { amp: 12, freq: 0.0105, speed: 1.2, yOff: 0.67, color: 'rgba(2, 132, 199, 0.11)', lineWidth: 1.0 },
+          ];
 
       const step = width < 768 ? 14 : 10;
       for (const w of waveConfigs) {
         ctx.beginPath();
-        const baseY = height * w.yOff + (pointer.y - 0.5) * 24;
+        const baseY = height * w.yOff + (pointer.y - 0.5) * 20;
         for (let x = 0; x <= width; x += step) {
           const normX = x / Math.max(width, 1);
           const envelope = Math.sin(normX * Math.PI);
-          // Subtle rhythmic heartbeat harmonic
           const pulse =
             Math.sin(x * w.freq + elapsed * w.speed) * w.amp +
             Math.sin(x * w.freq * 2.4 - elapsed * w.speed * 1.4) * (w.amp * 0.35);
@@ -145,8 +160,11 @@ export function BioSignalCanvas() {
         ctx.stroke();
       }
 
-      // Floating Biometric Signal Particles & subtle proximity constellations
-      const maxDist = width < 768 ? 85 : 120;
+      const palette = isDark
+        ? ['#2EF2C5', '#7C6BFF', '#38BDF8', '#FF6B6B']
+        : ['#0D9488', '#4F46E5', '#0284C7', '#E11D48'];
+
+      const maxDist = width < 768 ? 80 : 115;
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         if (!prefersReducedMotion) {
@@ -161,7 +179,7 @@ export function BioSignalCanvas() {
         const shimmer = 0.65 + 0.35 * Math.sin(elapsed * 2.2 + p.phase);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.hue;
+        ctx.fillStyle = palette[p.colorIdx];
         ctx.globalAlpha = p.alpha * shimmer;
         ctx.fill();
         ctx.globalAlpha = 1;
@@ -173,11 +191,13 @@ export function BioSignalCanvas() {
           const distSq = dx * dx + dy * dy;
           if (distSq < maxDist * maxDist) {
             const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / maxDist) * 0.11;
+            const alpha = (1 - dist / maxDist) * (isDark ? 0.11 : 0.08);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(46, 242, 197, ${alpha.toFixed(3)})`;
+            ctx.strokeStyle = isDark
+              ? `rgba(46, 242, 197, ${alpha.toFixed(3)})`
+              : `rgba(13, 148, 136, ${alpha.toFixed(3)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }

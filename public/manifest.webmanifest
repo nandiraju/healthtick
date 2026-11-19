@@ -1,0 +1,16 @@
+{
+  "name": "HealthTik — Personal Health Symptom Tracking Platform",
+  "short_name": "HealthTik",
+  "description": "Record, organize, map, and understand your personal health symptoms over time.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#0D9488",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

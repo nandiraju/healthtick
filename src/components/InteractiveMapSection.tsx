@@ -2,11 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Compass, Clock, Activity } from 'lucide-react';
 import { MAP_SYMPTOM_PINS, type MapSymptomPin } from '../data/healthData';
+import { useTheme } from '../context/ThemeContext';
 
 const REGIONS = ['All', 'Downtown', 'Office Park', 'Home', 'Transit'] as const;
 
 export function InteractiveMapSection() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
+
   const [regionFilter, setRegionFilter] = useState<(typeof REGIONS)[number]>('All');
   const [selectedPin, setSelectedPin] = useState<MapSymptomPin>(MAP_SYMPTOM_PINS[0]);
 
@@ -15,7 +20,7 @@ export function InteractiveMapSection() {
       ? MAP_SYMPTOM_PINS
       : MAP_SYMPTOM_PINS.filter((p) => p.region === regionFilter);
 
-  // 120fps Hardware-Accelerated Topographic & Radar Sweep Canvas
+  // 120fps Hardware-Accelerated Topographic & Radar Sweep Canvas (Light + Dark)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -62,14 +67,15 @@ export function InteractiveMapSection() {
       last = now;
       if (!prefersReducedMotion) t += dt;
 
+      const isDark = themeRef.current === 'dark';
       ctx.clearRect(0, 0, width, height);
 
-      // Dark map base
-      ctx.fillStyle = '#070D1A';
+      // Map base tuned for Light vs Dark
+      ctx.fillStyle = isDark ? '#070D1A' : '#F1F5F9';
       ctx.fillRect(0, 0, width, height);
 
       // Subtle latitude / longitude grid
-      ctx.strokeStyle = 'rgba(138, 153, 178, 0.07)';
+      ctx.strokeStyle = isDark ? 'rgba(138, 153, 178, 0.07)' : 'rgba(15, 23, 42, 0.06)';
       ctx.lineWidth = 1;
       const grid = 48;
       for (let x = 0; x < width; x += grid) {
@@ -103,7 +109,7 @@ export function InteractiveMapSection() {
             0,
             Math.PI * 2
           );
-          ctx.strokeStyle = 'rgba(46, 242, 197, 0.065)';
+          ctx.strokeStyle = isDark ? 'rgba(46, 242, 197, 0.065)' : 'rgba(13, 148, 136, 0.11)';
           ctx.stroke();
         }
       }
@@ -117,7 +123,7 @@ export function InteractiveMapSection() {
           if (idx === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         });
-        ctx.strokeStyle = 'rgba(124, 107, 255, 0.24)';
+        ctx.strokeStyle = isDark ? 'rgba(124, 107, 255, 0.28)' : 'rgba(79, 70, 229, 0.26)';
         ctx.setLineDash([4, 6]);
         ctx.lineWidth = 1.25;
         ctx.stroke();
@@ -131,7 +137,7 @@ export function InteractiveMapSection() {
         const pulsePhase = (t * 0.65 + idx * 0.28) % 1;
         const maxR = 26 + pin.severity * 4.2;
         const r = 8 + pulsePhase * maxR;
-        const alpha = (1 - pulsePhase) * 0.42;
+        const alpha = (1 - pulsePhase) * 0.44;
 
         ctx.beginPath();
         ctx.arc(px, py, r, 0, Math.PI * 2);
@@ -140,10 +146,9 @@ export function InteractiveMapSection() {
         ctx.lineWidth = 1.6;
         ctx.stroke();
 
-        // Soft heat radial glow
         const glow = ctx.createRadialGradient(px, py, 0, px, py, maxR * 0.9);
-        glow.addColorStop(0, `${pin.color}33`);
-        glow.addColorStop(1, 'rgba(7, 13, 26, 0)');
+        glow.addColorStop(0, `${pin.color}2E`);
+        glow.addColorStop(1, isDark ? 'rgba(7, 13, 26, 0)' : 'rgba(241, 245, 249, 0)');
         ctx.globalAlpha = 1;
         ctx.fillStyle = glow;
         ctx.beginPath();
@@ -160,8 +165,11 @@ export function InteractiveMapSection() {
       ctx.translate(cx, cy);
       ctx.rotate(sweepAngle);
       const beamGrad = ctx.createLinearGradient(0, 0, radius, 0);
-      beamGrad.addColorStop(0, 'rgba(46, 242, 197, 0.08)');
-      beamGrad.addColorStop(1, 'rgba(46, 242, 197, 0)');
+      beamGrad.addColorStop(
+        0,
+        isDark ? 'rgba(46, 242, 197, 0.08)' : 'rgba(13, 148, 136, 0.09)'
+      );
+      beamGrad.addColorStop(1, 'rgba(13, 148, 136, 0)');
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, radius, -0.12, 0.12);
@@ -181,23 +189,23 @@ export function InteractiveMapSection() {
   }, [visiblePins]);
 
   return (
-    <section id="health-map" className="relative py-24 sm:py-32">
+    <section id="health-map" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <div className="glass-pill mb-4 inline-flex items-center gap-2 rounded-full px-3.5 py-1">
-              <Compass className="h-3.5 w-3.5 text-[#FF6B6B]" />
-              <span className="font-mono-tech text-[11px] uppercase tracking-widest text-[#CFE4F8]">
+              <Compass className="h-3.5 w-3.5 text-rose-600 dark:text-[#FF6B6B]" />
+              <span className="font-mono-tech text-[11px] font-medium uppercase tracking-widest text-slate-700 dark:text-[#CFE4F8]">
                 Health Map · Spatial Intelligence
               </span>
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-5xl dark:text-white">
               See Your Health{' '}
               <span className="font-serif-editorial text-gradient-bio font-normal italic">
                 Geographically.
               </span>
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#9BB0CB]">
+            <p className="mt-4 text-base leading-relaxed text-slate-600 dark:text-[#9BB0CB]">
               Explore where symptoms occur on an interactive map. Tap any pulsing marker to inspect
               recorded notes, severity, and timestamps — revealing environmental and location-based
               patterns invisible in plain lists.
@@ -222,8 +230,8 @@ export function InteractiveMapSection() {
                   }}
                   className={`rounded-xl px-3.5 py-2 text-xs font-semibold transition-all ${
                     active
-                      ? 'bg-white text-[#05080F] shadow-[0_0_20px_rgba(255,255,255,0.2)]'
-                      : 'border border-white/10 bg-white/[0.03] text-[#9BB0CB] hover:bg-white/[0.08] hover:text-white'
+                      ? 'bg-slate-950 text-white shadow-sm dark:bg-white dark:text-[#05080F]'
+                      : 'border border-slate-900/10 bg-white/75 text-slate-600 hover:bg-white hover:text-slate-950 dark:border-white/10 dark:bg-white/[0.03] dark:text-[#9BB0CB] dark:hover:bg-white/[0.08] dark:hover:text-white'
                   }`}
                 >
                   {region}
@@ -235,7 +243,7 @@ export function InteractiveMapSection() {
 
         {/* Interactive Map Stage */}
         <div className="glass-panel relative mt-10 overflow-hidden rounded-[2rem] p-2 sm:p-3">
-          <div className="relative h-[430px] w-full overflow-hidden rounded-[1.5rem] border border-white/[0.08] sm:h-[490px]">
+          <div className="relative h-[430px] w-full overflow-hidden rounded-[1.5rem] border border-slate-900/10 sm:h-[490px] dark:border-white/[0.08]">
             <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
             {/* Interactive Clickable Marker Buttons */}
@@ -252,11 +260,13 @@ export function InteractiveMapSection() {
                 >
                   <span
                     className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-transform duration-200 ${
-                      isSelected ? 'scale-125 border-white' : 'border-[#05080F] group-hover:scale-110'
+                      isSelected
+                        ? 'scale-125 border-slate-950 dark:border-white'
+                        : 'border-white group-hover:scale-110 dark:border-[#05080F]'
                     }`}
                     style={{
-                      backgroundColor: `${pin.color}26`,
-                      boxShadow: `0 0 24px ${pin.color}99`,
+                      backgroundColor: `${pin.color}28`,
+                      boxShadow: `0 0 20px ${pin.color}77`,
                     }}
                   >
                     <span
@@ -264,7 +274,7 @@ export function InteractiveMapSection() {
                       style={{ backgroundColor: pin.color }}
                     />
                   </span>
-                  <span className="mt-1.5 hidden rounded-lg border border-white/10 bg-[#05080F]/90 px-2 py-0.5 font-mono-tech text-[10px] font-medium whitespace-nowrap text-white shadow-lg sm:inline-block">
+                  <span className="mt-1.5 hidden rounded-lg border border-slate-900/10 bg-white/95 px-2 py-0.5 font-mono-tech text-[10px] font-semibold whitespace-nowrap text-slate-900 shadow sm:inline-block dark:border-white/10 dark:bg-[#05080F]/90 dark:text-white">
                     {pin.symptom}
                   </span>
                 </button>
@@ -273,8 +283,8 @@ export function InteractiveMapSection() {
 
             {/* Top Left Map Telemetry Badge */}
             <div className="glass-pill absolute top-4 left-4 z-10 flex items-center gap-2 rounded-xl px-3 py-1.5">
-              <span className="h-2 w-2 rounded-full bg-[#2EF2C5]" />
-              <span className="font-mono-tech text-[11px] text-[#CFE4F8]">
+              <span className="h-2 w-2 rounded-full bg-teal-600 dark:bg-[#2EF2C5]" />
+              <span className="font-mono-tech text-[11px] font-medium text-slate-700 dark:text-[#CFE4F8]">
                 {visiblePins.length} Mapped Occurrences
               </span>
             </div>
@@ -295,16 +305,18 @@ export function InteractiveMapSection() {
                       <span
                         className="flex h-9 w-9 items-center justify-center rounded-xl"
                         style={{
-                          backgroundColor: `${selectedPin.color}22`,
+                          backgroundColor: `${selectedPin.color}20`,
                           color: selectedPin.color,
                         }}
                       >
                         <Activity className="h-4 w-4" />
                       </span>
                       <div>
-                        <h3 className="text-sm font-bold text-white">{selectedPin.symptom}</h3>
-                        <p className="flex items-center gap-1 text-xs text-[#9BB0CB]">
-                          <MapPin className="h-3 w-3 text-[#7C6BFF]" />
+                        <h3 className="text-sm font-bold text-slate-950 dark:text-white">
+                          {selectedPin.symptom}
+                        </h3>
+                        <p className="flex items-center gap-1 text-xs text-slate-500 dark:text-[#9BB0CB]">
+                          <MapPin className="h-3 w-3 text-indigo-600 dark:text-[#7C6BFF]" />
                           {selectedPin.locationName}
                         </p>
                       </div>
@@ -313,20 +325,20 @@ export function InteractiveMapSection() {
                       className="font-mono-tech rounded-lg px-2 py-1 text-xs font-bold"
                       style={{
                         color: selectedPin.color,
-                        backgroundColor: `${selectedPin.color}1F`,
+                        backgroundColor: `${selectedPin.color}1C`,
                       }}
                     >
                       {selectedPin.severity}/10
                     </span>
                   </div>
 
-                  <p className="mt-3 text-xs leading-relaxed text-[#CFE4F8]">
+                  <p className="mt-3 text-xs leading-relaxed text-slate-700 dark:text-[#CFE4F8]">
                     {selectedPin.notes}
                   </p>
 
-                  <div className="mt-3 flex items-center justify-between border-t border-white/[0.08] pt-2.5 font-mono-tech text-[10px] text-[#8A99B2]">
+                  <div className="mt-3 flex items-center justify-between border-t border-slate-900/10 pt-2.5 font-mono-tech text-[10px] text-slate-500 dark:border-white/[0.08] dark:text-[#8A99B2]">
                     <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3 text-[#2EF2C5]" />
+                      <Clock className="h-3 w-3 text-teal-600 dark:text-[#2EF2C5]" />
                       {selectedPin.timestamp}
                     </span>
                     <span>{selectedPin.coords}</span>

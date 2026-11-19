@@ -1,22 +1,172 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#05080F" />
-    <title>HealthTik — Track What Your Body Is Telling You</title>
+
+    <!-- Primary SEO Meta Tags -->
+    <title>HealthTik — Track What Your Body Is Telling You | Personal Health Symptom Tracker</title>
+    <meta
+      name="title"
+      content="HealthTik — Track What Your Body Is Telling You | Personal Health Symptom Tracker"
+    />
     <meta
       name="description"
-      content="HealthTik is a personal health symptom tracking platform. Log symptoms in seconds, map geographical patterns, explore your chronological health history, and turn health data into clear insights."
+      content="HealthTik is a personal health symptom tracking platform. Log symptoms in seconds, customize your symptom library, explore your chronological health history, map symptoms geographically, and turn health data into shareable insights."
     />
+    <meta
+      name="keywords"
+      content="HealthTik, symptom tracker app, personal health journal, symptom log, health map, symptom analytics, medical history tracker, chronic symptom tracking, share health reports with doctor, iOS health app, Android health app"
+    />
+    <meta name="author" content="HealthTik" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://nandiraju.github.io/healthtick/" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#05080F" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph / Facebook / LinkedIn / iMessage -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nandiraju.github.io/healthtick/" />
+    <meta property="og:site_name" content="HealthTik" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="HealthTik — Track What Your Body Is Telling You"
+    />
+    <meta
+      property="og:description"
+      content="Record, organize, map, and understand your health symptoms over time. Build a personalized symptom library, visualize geographical patterns, and share structured reports with healthcare professionals."
+    />
+    <meta property="og:image" content="https://nandiraju.github.io/healthtick/favicon.svg" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nandiraju.github.io/healthtick/" />
+    <meta
+      name="twitter:title"
+      content="HealthTik — Personal Health Symptom Tracking Platform"
+    />
+    <meta
+      name="twitter:description"
+      content="Log symptoms in seconds, visualize geographical patterns on an interactive Health Map, and turn personal health records into doctor-ready insights."
+    />
+    <meta name="twitter:image" content="https://nandiraju.github.io/healthtick/favicon.svg" />
+
+    <!-- Performance: Preconnect Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Prevent Theme Flash (Default: Light Theme) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('healthtik-theme');
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Google Analytics 4 (GA4) Ready-to-Activate Tag -->
+    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics 4 Measurement ID -->
+    <script>
+      window.GA_MEASUREMENT_ID = ''; // e.g. 'G-XXXXXXXXXX'
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      if (window.GA_MEASUREMENT_ID) {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_MEASUREMENT_ID;
+        document.head.appendChild(gaScript);
+        gtag('js', new Date());
+        gtag('config', window.GA_MEASUREMENT_ID, { anonymize_ip: true });
+      }
+    </script>
+
+    <!-- Structured Data (JSON-LD) for Rich Search Results -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://nandiraju.github.io/healthtick/#website",
+            "url": "https://nandiraju.github.io/healthtick/",
+            "name": "HealthTik",
+            "description": "HealthTik — A Personal Health Symptom Tracking Platform",
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "MobileApplication",
+            "@id": "https://nandiraju.github.io/healthtick/#app",
+            "name": "HealthTik",
+            "operatingSystem": "iOS, Android",
+            "applicationCategory": "HealthApplication",
+            "description": "HealthTik helps individuals record, organize, visualize, and understand their health symptoms over time with personalized symptom tracking, geographical mapping, historical records, visual analytics, and exportable reports.",
+            "featureList": [
+              "Symptom Tracking with intensity, notes, timestamps, and location capture",
+              "Personalized custom symptom library management",
+              "Complete searchable and filterable chronological symptom history",
+              "Interactive Health Map for geographical symptom pattern visualization",
+              "Visual Health Reports and Analytics charts for frequency and intensity trends",
+              "Data Sharing and Export for discussions with healthcare professionals",
+              "Secure individual user account management"
+            ],
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is HealthTik?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "HealthTik is a personal health symptom tracking platform that helps individuals record, organize, geographically map, visualize, and share their health symptoms over time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I customize the symptoms I track in HealthTik?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. HealthTik lets you build a custom library of health symptoms where you can add, edit, and remove symptoms to tailor the tracking experience to your individual needs."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I share my HealthTik symptom history with my doctor?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. HealthTik allows you to organize and export symptom records and visual health reports to make your documented health history accessible for discussions with healthcare professionals."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
-  <body class="bg-[#05080F] text-[#F4F7FB] antialiased selection:bg-[#2EF2C5]/25 selection:text-[#2EF2C5]">
+  <body class="bg-[#F8FAFC] text-[#0B1220] antialiased transition-colors duration-300 dark:bg-[#05080F] dark:text-[#F4F7FB]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
