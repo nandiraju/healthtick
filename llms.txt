@@ -1,0 +1,20 @@
+# HealthTik
+
+> HealthTik is a Personal Health Symptom Tracking Platform for iOS and Android that helps individuals record, organize, geographically map, visualize, and share their health symptoms over time.
+
+## Links
+- Homepage: https://health.cend.in/
+- Support & FAQ: https://health.cend.in/support/
+- Privacy Policy: https://health.cend.in/privacy/
+- Apple App Store: https://apps.apple.com/app/id1076611952
+- Google Play: https://play.google.com/store/apps/details?id=me.healthtik.app
+- Support Email: support@cend.in
+
+## Core Features
+1. **Symptom Tracking (Track What Your Body Is Telling You)**: Log individual health symptoms as they occur with severity/intensity levels, notes, timestamps, and geographical location.
+2. **Personalized Symptom Management (Your Symptoms, Your Way)**: Create, edit, and remove custom symptoms in a personalized library tailored to individual needs.
+3. **Symptom History (Your Health Journey, Documented)**: Maintain a complete chronological history of symptom records with notes, timestamps, search, and filtering.
+4. **Health Map (See Your Health Geographically)**: Visualize symptom occurrences on an interactive map to spot geographical and environmental patterns.
+5. **Health Reports & Analytics (Turn Health Data Into Insights)**: Analyze symptom frequency over time, monitor intensity trends, identify frequently occurring symptoms, and export reports.
+6. **Data Sharing & Export (Make Your Health History Accessible)**: Export and share documented health records and reports for informed discussions with healthcare professionals.
+7. **User Account Management**: Secure login and logout with individual user accounts and private access to personal symptom history.
