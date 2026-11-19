@@ -1,20 +1,8 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, ArrowRight, CheckCircle2, Smartphone } from 'lucide-react';
+import { Activity, Smartphone } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
 export function DownloadCTAAndFooter() {
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleJoin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    trackEvent('waitlist_signup');
-    setSubmitted(true);
-    setEmail('');
-  };
-
   return (
     <>
       <section id="download" className="relative py-20 sm:py-28">
@@ -86,36 +74,6 @@ export function DownloadCTAAndFooter() {
                   </div>
                 </motion.a>
               </div>
-
-              {/* Release Notification Form */}
-              <form
-                onSubmit={handleJoin}
-                className="mx-auto mt-8 flex max-w-md flex-col gap-2.5 sm:flex-row"
-              >
-                {submitted ? (
-                  <div className="flex w-full items-center justify-center gap-2 rounded-2xl border border-teal-500/35 bg-teal-50 px-4 py-3 text-xs font-semibold text-teal-700 dark:border-[#2EF2C5]/35 dark:bg-[#2EF2C5]/10 dark:text-[#2EF2C5]">
-                    <CheckCircle2 className="h-4 w-4" />
-                    <span>You&apos;re on the HealthTik updates list!</span>
-                  </div>
-                ) : (
-                  <>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email for release updates..."
-                      className="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-xs text-slate-900 placeholder-slate-400 focus:border-teal-500 focus:outline-none dark:border-white/10 dark:bg-[#05080F]/80 dark:text-white dark:placeholder-[#64748B] dark:focus:border-[#2EF2C5]/60"
-                    />
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-r from-[#0D9488] to-[#4F46E5] px-5 py-3 text-xs font-bold text-white transition-transform active:scale-95 dark:from-[#2EF2C5] dark:to-[#7C6BFF] dark:text-[#05080F]"
-                    >
-                      Notify Me <ArrowRight className="h-3.5 w-3.5" />
-                    </button>
-                  </>
-                )}
-              </form>
             </div>
           </div>
         </div>
