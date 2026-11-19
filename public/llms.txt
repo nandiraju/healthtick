@@ -7,7 +7,7 @@
 - Support & FAQ: https://healthtik.cend.in/support/
 - Privacy Policy: https://healthtik.cend.in/privacy/
 - Apple App Store: https://apps.apple.com/app/id1076611952
-- Support Email: support@healthtik.cend.in
+- Support Email: support@cend.in
 
 ## Core Features
 1. **Symptom Tracking (Track What Your Body Is Telling You)**: Log individual health symptoms as they occur with severity/intensity levels, notes, timestamps, and geographical location.
