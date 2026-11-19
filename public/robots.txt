@@ -16,4 +16,4 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://nandiraju.github.io/healthtick/sitemap.xml
+Sitemap: https://healthtik.me/sitemap.xml

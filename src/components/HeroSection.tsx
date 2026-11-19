@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { BioSignalCanvas } from './BioSignalCanvas';
 import { IPhoneFrame } from './IPhoneFrame';
+import { APP_STORE_URL } from '../constants';
 import { trackEvent } from '../utils/analytics';
 
 export function HeroSection() {
@@ -92,11 +93,13 @@ export function HeroSection() {
               className="mt-8 flex flex-wrap items-center gap-3.5"
             >
               <a
-                href="#download"
-                onClick={() => trackEvent('cta_click', { location: 'hero_primary' })}
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent('store_click', { store: 'app_store', location: 'hero_primary' })}
                 className="group inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#0D9488] via-[#0284C7] to-[#4F46E5] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_rgba(13,148,136,0.28)] transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] dark:from-[#2EF2C5] dark:via-[#4FE8D8] dark:to-[#7C6BFF] dark:text-[#05080F] dark:shadow-[0_0_36px_rgba(46,242,197,0.35)]"
               >
-                <span>Download the App</span>
+                <span>Download on App Store</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
 
