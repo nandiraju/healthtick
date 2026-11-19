@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Menu, X, ArrowUpRight } from 'lucide-react';
-import { APP_STORE_URL } from '../constants';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { APP_STORE_URL, PLAY_STORE_URL } from '../constants';
 import { trackEvent } from '../utils/analytics';
 
 const NAV_LINKS = [
@@ -33,9 +33,13 @@ export function Navbar() {
       >
         {/* Brand */}
         <a href="/" className="group flex items-center gap-2.5 focus:outline-none">
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#0D9488] to-[#4F46E5] shadow-[0_6px_18px_rgba(13,148,136,0.28)] dark:from-[#2EF2C5] dark:to-[#7C6BFF]">
-            <Activity className="h-4 w-4 text-white transition-transform duration-300 group-hover:scale-110 dark:text-[#05080F]" />
-          </div>
+          <img
+            src="/icon-192.png"
+            alt=""
+            width={36}
+            height={36}
+            className="h-9 w-9 rounded-[10px] shadow-[0_6px_18px_rgba(7,84,92,0.28)] transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="text-base font-bold tracking-tight text-slate-900 dark:text-white">
             Health<span className="text-[#0D9488] dark:text-[#2EF2C5]">Tik</span>
           </span>
@@ -64,6 +68,16 @@ export function Navbar() {
             className="group hidden items-center gap-1.5 rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white shadow-[0_6px_20px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] sm:inline-flex dark:bg-white dark:text-[#05080F]"
           >
             App Store
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackEvent('store_click', { store: 'google_play', location: 'navbar' })}
+            className="group glass-pill hidden items-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold text-slate-900 transition-transform duration-200 hover:scale-[1.03] active:scale-[0.98] sm:inline-flex dark:text-white"
+          >
+            Google Play
             <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
 
@@ -110,6 +124,19 @@ export function Navbar() {
                 className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#0D9488] to-[#4F46E5] px-4 py-3 text-sm font-bold text-white dark:from-[#2EF2C5] dark:to-[#7C6BFF] dark:text-[#05080F]"
               >
                 Download on the App Store
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  setMobileOpen(false);
+                  trackEvent('store_click', { store: 'google_play', location: 'mobile_drawer' });
+                }}
+                className="mt-2 flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-bold text-white dark:bg-white dark:text-[#05080F]"
+              >
+                Get it on Google Play
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>

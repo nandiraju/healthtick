@@ -1,12 +1,13 @@
 # HealthTik
 
-> HealthTik is a Personal Health Symptom Tracking Platform for iOS that helps individuals record, organize, geographically map, visualize, and share their health symptoms over time.
+> HealthTik is a Personal Health Symptom Tracking Platform for iOS and Android that helps individuals record, organize, geographically map, visualize, and share their health symptoms over time.
 
 ## Links
 - Homepage: https://health.cend.in/
 - Support & FAQ: https://health.cend.in/support/
 - Privacy Policy: https://health.cend.in/privacy/
 - Apple App Store: https://apps.apple.com/app/id1076611952
+- Google Play: https://play.google.com/store/apps/details?id=me.healthtik.app
 - Support Email: support@cend.in
 
 ## Core Features

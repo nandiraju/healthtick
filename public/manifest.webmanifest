@@ -4,8 +4,8 @@
   "description": "Record, organize, map, and understand your personal health symptoms over time.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#F8FAFC",
-  "theme_color": "#0D9488",
+  "background_color": "#07545C",
+  "theme_color": "#07545C",
   "icons": [
     {
       "src": "./icon-192.png",
@@ -16,11 +16,6 @@
       "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "./favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
     }
   ]
 }

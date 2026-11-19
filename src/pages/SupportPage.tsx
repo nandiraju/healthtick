@@ -14,7 +14,7 @@ import { ThemeProvider } from '../context/ThemeContext';
 import { Navbar } from '../components/Navbar';
 import { FaqSection } from '../components/FaqSection';
 import { DownloadCTAAndFooter } from '../components/DownloadCTAAndFooter';
-import { APP_STORE_URL, SUPPORT_EMAIL } from '../constants';
+import { APP_STORE_URL, PLAY_STORE_URL, SUPPORT_EMAIL } from '../constants';
 import { trackEvent } from '../utils/analytics';
 
 const HELP_TOPICS = [
@@ -31,7 +31,7 @@ const HELP_TOPICS = [
   {
     icon: MapPin,
     title: 'Health Map & Location Access',
-    desc: 'Health Map uses location permissions only when you log symptoms so you can visualize geographical patterns. You can adjust location permissions anytime in iOS Settings → HealthTik.',
+    desc: 'Health Map uses location permissions only when you log symptoms so you can visualize geographical patterns. You can adjust location permissions anytime in your device settings on iOS or Android.',
   },
   {
     icon: Share2,
@@ -97,6 +97,17 @@ export function SupportPage() {
                       className="glass-pill inline-flex items-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-white dark:text-white dark:hover:bg-white/[0.1]"
                     >
                       <span>View on App Store</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+
+                    <a
+                      href={PLAY_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEvent('store_click', { store: 'google_play', page: 'support' })}
+                      className="glass-pill inline-flex items-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-white dark:text-white dark:hover:bg-white/[0.1]"
+                    >
+                      <span>View on Google Play</span>
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
 

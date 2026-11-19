@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- Primary Technical SEO Meta Tags -->
-  <title>HealthTik — Personal Health Symptom Tracker for iPhone</title>
-  <meta name="title" content="HealthTik — Personal Health Symptom Tracker for iPhone" />
+  <title>HealthTik — Symptom Tracker for iPhone & Android</title>
+  <meta name="title" content="HealthTik — Symptom Tracker for iPhone & Android" />
   <meta name="description"
-    content="HealthTik is a symptom tracker app for iPhone. Log symptoms in seconds, map where they happen, review your history, and share doctor-ready reports." />
+    content="HealthTik is a symptom tracker app for iPhone and Android. Log symptoms in seconds, map where they happen, review your history, and share doctor-ready reports." />
   <meta name="keywords"
-    content="HealthTik, symptom tracker app, personal health symptom tracker, daily symptom journal, health map, geographical symptom tracking, symptom intensity tracker, chronic illness symptom log, health analytics app, share symptom history with doctor, iOS health app, iPhone symptom tracker" />
+    content="HealthTik, symptom tracker app, personal health symptom tracker, daily symptom journal, health map, geographical symptom tracking, symptom intensity tracker, chronic illness symptom log, health analytics app, share symptom history with doctor, iOS health app, iPhone symptom tracker, Android symptom tracker" />
   <meta name="author" content="HealthTik" />
   <meta name="application-name" content="HealthTik" />
   <meta name="apple-itunes-app" content="app-id=1076611952" />
@@ -34,7 +34,9 @@
   <link rel="alternate" hreflang="x-default" href="https://health.cend.in/" />
 
   <!-- Icons, Manifest & Theme Color -->
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <meta name="theme-color" content="#F4F7FB" media="(prefers-color-scheme: light)" />
@@ -127,7 +129,10 @@
               "email": "support@cend.in",
               "url": "https://health.cend.in/support/"
             },
-            "sameAs": ["https://apps.apple.com/app/id1076611952"]
+            "sameAs": [
+              "https://apps.apple.com/app/id1076611952",
+              "https://play.google.com/store/apps/details?id=me.healthtik.app"
+            ]
           },
           {
             "@type": "WebSite",
@@ -182,10 +187,11 @@
             "@type": "MobileApplication",
             "@id": "https://health.cend.in/#app",
             "name": "HealthTik",
-            "operatingSystem": "iOS",
+            "operatingSystem": "iOS, Android",
             "applicationCategory": "HealthApplication",
             "downloadUrl": "https://apps.apple.com/app/id1076611952",
             "installUrl": "https://apps.apple.com/app/id1076611952",
+            "sameAs": ["https://apps.apple.com/app/id1076611952", "https://play.google.com/store/apps/details?id=me.healthtik.app"],
             "description": "HealthTik helps individuals record, organize, visualize, and understand their health symptoms over time with personalized symptom tracking, geographical mapping, historical records, visual analytics, and exportable reports.",
             "screenshot": "https://health.cend.in/og-image.png",
             "featureList": [
@@ -293,6 +299,7 @@
       </ul>
       <p>
         <a href="https://apps.apple.com/app/id1076611952">Download HealthTik on the App Store</a> |
+        <a href="https://play.google.com/store/apps/details?id=me.healthtik.app">Get HealthTik on Google Play</a> |
         <a href="/support/">Support &amp; FAQ</a> |
         <a href="/privacy/">Privacy Policy</a> |
         <a href="mailto:support@cend.in">support@cend.in</a>

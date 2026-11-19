@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { Activity, Smartphone, Sun, Moon, Mail } from 'lucide-react';
+import { Smartphone, Sun, Moon, Mail } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import { APP_STORE_URL, SUPPORT_EMAIL } from '../constants';
+import { APP_STORE_URL, PLAY_STORE_URL, SUPPORT_EMAIL } from '../constants';
 import { trackEvent } from '../utils/analytics';
 
 interface DownloadCTAAndFooterProps {
@@ -27,7 +27,7 @@ export function DownloadCTAAndFooter({ showCta = true }: DownloadCTAAndFooterPro
                 <div className="glass-pill mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5">
                   <Smartphone className="h-3.5 w-3.5 text-teal-600 dark:text-[#2EF2C5]" />
                   <span className="font-mono-tech text-[11px] font-medium uppercase tracking-widest text-slate-700 dark:text-[#CFE4F8]">
-                    Available on the Apple App Store
+                    Available on the App Store & Google Play
                   </span>
                 </div>
 
@@ -66,6 +66,24 @@ export function DownloadCTAAndFooter({ showCta = true }: DownloadCTAAndFooterPro
                   <motion.a
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent('store_click', { store: 'google_play', location: 'cta' })}
+                    className="inline-flex items-center gap-3 rounded-2xl bg-slate-950 px-6 py-3.5 text-left text-white shadow-[0_12px_30px_rgba(15,23,42,0.2)] dark:bg-white dark:text-[#05080F]"
+                  >
+                    <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3.6 2.3c-.4.3-.6.8-.6 1.4v16.6c0 .6.2 1.1.6 1.4l9.5-9.7-9.5-9.7zm10.6 10.8 2.7 2.7-11 6.2 8.3-8.9zm3.9-3.3 3 1.7c.9.5.9 1.5 0 2l-3 1.7-3-3 3-2.4zM5.9 2l11 6.2-2.7 2.7L5.9 2z" />
+                    </svg>
+                    <div>
+                      <div className="text-[10px] font-medium opacity-75">Get it on</div>
+                      <div className="text-sm font-extrabold leading-tight">Google Play</div>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
                     href={`mailto:${SUPPORT_EMAIL}?subject=HealthTik%20Inquiry`}
                     className="glass-pill inline-flex items-center gap-2.5 rounded-2xl px-6 py-4 text-sm font-semibold text-slate-900 transition-colors hover:bg-white/90 dark:text-white dark:hover:bg-white/[0.1]"
                   >
@@ -86,9 +104,9 @@ export function DownloadCTAAndFooter({ showCta = true }: DownloadCTAAndFooterPro
           <a
             href="/"
             aria-label="HealthTik Home"
-            className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0D9488] to-[#4F46E5] shadow-[0_10px_28px_rgba(13,148,136,0.28)] transition-transform duration-200 hover:scale-105 dark:from-[#2EF2C5] dark:to-[#7C6BFF]"
+            className="block h-14 w-14 overflow-hidden rounded-2xl shadow-[0_10px_28px_rgba(7,84,92,0.28)] transition-transform duration-200 hover:scale-105"
           >
-            <Activity className="h-7 w-7 text-white dark:text-[#05080F]" />
+            <img src="/icon-192.png" alt="" width={56} height={56} className="h-full w-full" />
           </a>
 
           {/* Copyright */}
