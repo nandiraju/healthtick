@@ -5,11 +5,22 @@ import { Navbar } from '../components/Navbar';
 import { DownloadCTAAndFooter } from '../components/DownloadCTAAndFooter';
 import { SUPPORT_EMAIL, SITE_URL } from '../constants';
 
-const SECTIONS = [
+const DELETION_WINDOW_DAYS = 30;
+
+interface PolicySection {
+  title: string;
+  id?: string;
+  body: string[];
+  steps?: string[];
+  lists?: { heading: string; items: string[] }[];
+  after?: string[];
+}
+
+const SECTIONS: PolicySection[] = [
   {
     title: '1. Overview & Commitment to Your Privacy',
     body: [
-      'HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application (iOS App ID: 1076611952) and website at health.cend.in.',
+      'HealthTik ("we," "our," or "us") respects your privacy and is committed to protecting the personal and health information you record using the HealthTik mobile application for iOS (App ID: 1076611952) and Android, and the website at health.cend.in.',
       'This Privacy Policy explains what information the HealthTik app collects, how it is used, how it is protected, and the choices you have over your data.',
     ],
   },
@@ -17,7 +28,7 @@ const SECTIONS = [
     title: '2. Information We Collect',
     body: [
       'Health & Symptom Data: Symptoms you create or log, severity/intensity ratings, personal notes and observations, timestamps, and your personalized symptom library.',
-      'Location Data (Optional): If you grant location permissions on your device, HealthTik records the geographical location associated with a symptom entry so you can visualize patterns on your personal Health Map. You may disable location access at any time in your iOS Settings.',
+      'Location Data (Optional): If you grant location permissions on your device, HealthTik records the geographical location associated with a symptom entry so you can visualize patterns on your personal Health Map. You may disable location access at any time in your device settings.',
       'Account Data: Basic account credentials (such as your email address and authentication identifiers) required to provide secure individual user login, logout, and access to your personal symptom history.',
       'Analytics & Diagnostics: We may collect anonymized crash logs, performance diagnostics, and aggregate website usage analytics (such as Google Analytics on health.cend.in) to improve app stability and user experience. Health symptom content and personal notes are never included in marketing or advertising analytics.',
     ],
@@ -51,9 +62,39 @@ const SECTIONS = [
   },
   {
     title: '7. Data Retention & Account Deletion',
+    id: 'account-deletion',
     body: [
-      'We retain your personal symptom history for as long as your account remains active or as needed to provide the service.',
-      `You may delete individual symptom entries within the app at any time. To request permanent deletion of your HealthTik account and all associated data, contact us at ${SUPPORT_EMAIL} from your registered email address, and we will process your request promptly.`,
+      'This section applies to the HealthTik app, published under the name "HealthTik" on Google Play and the Apple App Store.',
+      'We retain your personal symptom history for as long as your account remains active. You may delete individual symptom entries within the app at any time. You can also request deletion of your HealthTik account and all associated data by following these steps:',
+    ],
+    steps: [
+      `Send an email to ${SUPPORT_EMAIL} from the email address registered to your HealthTik account.`,
+      'Use the subject line "Delete my HealthTik account".',
+      'We will reply to confirm that the request came from the account owner.',
+      `Once confirmed, we permanently delete your account and associated data within ${DELETION_WINDOW_DAYS} days and email you when deletion is complete.`,
+    ],
+    lists: [
+      {
+        heading: 'Data that is deleted',
+        items: [
+          'Your account profile and login credentials (email address and authentication identifiers).',
+          'All symptom entries, including severity/intensity ratings, timestamps, and personal notes.',
+          'Your personalized symptom library.',
+          'All location data attached to symptom entries and shown on your Health Map.',
+          'Reports and analytics generated from your records.',
+        ],
+      },
+      {
+        heading: 'Data that may be kept',
+        items: [
+          'Anonymized, aggregate crash and usage diagnostics that cannot be linked back to you or your account.',
+          'Records we are legally required to retain, such as the deletion request itself, kept only for as long as the law requires.',
+        ],
+      },
+    ],
+    after: [
+      `Retention period: after your request is confirmed, your account and personal data are removed within ${DELETION_WINDOW_DAYS} days. We do not keep your health or symptom data beyond that period.`,
+      'Deletion is permanent and cannot be undone. Copies of reports you previously exported or shared outside HealthTik are not affected, because they are no longer under our control.',
     ],
   },
   {
@@ -120,18 +161,40 @@ export function PrivacyPage() {
                   HealthTik Privacy Policy
                 </h1>
                 <p className="mt-2 font-mono-tech text-xs text-slate-500 dark:text-[#8A99B2]">
-                  Effective Date: November 19, 2026 · Applies to HealthTik iOS App & health.cend.in
+                  Effective Date: November 19, 2026 · Applies to the HealthTik mobile app (iOS & Android) & health.cend.in
                 </p>
 
                 <div className="mt-8 space-y-8 border-t border-slate-900/10 pt-8 dark:border-white/[0.08]">
                   {SECTIONS.map((sec) => (
-                    <section key={sec.title}>
+                    <section key={sec.title} id={sec.id} className="scroll-mt-28">
                       <h2 className="text-lg font-bold text-slate-950 dark:text-white">
                         {sec.title}
                       </h2>
                       <div className="mt-2.5 space-y-3 text-sm leading-relaxed text-slate-600 dark:text-[#9BB0CB]">
                         {sec.body.map((paragraph, i) => (
                           <p key={i}>{paragraph}</p>
+                        ))}
+                        {sec.steps && (
+                          <ol className="list-decimal space-y-1.5 pl-5">
+                            {sec.steps.map((step, i) => (
+                              <li key={i}>{step}</li>
+                            ))}
+                          </ol>
+                        )}
+                        {sec.lists?.map((list) => (
+                          <div key={list.heading}>
+                            <h3 className="font-bold text-slate-950 dark:text-white">
+                              {list.heading}
+                            </h3>
+                            <ul className="mt-1.5 list-disc space-y-1.5 pl-5">
+                              {list.items.map((item, i) => (
+                                <li key={i}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                        {sec.after?.map((paragraph, i) => (
+                          <p key={`after-${i}`}>{paragraph}</p>
                         ))}
                       </div>
                     </section>
