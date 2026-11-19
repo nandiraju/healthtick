@@ -9,7 +9,7 @@ interface DownloadCTAAndFooterProps {
 }
 
 export function DownloadCTAAndFooter({ showCta = true }: DownloadCTAAndFooterProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
@@ -79,83 +79,85 @@ export function DownloadCTAAndFooter({ showCta = true }: DownloadCTAAndFooterPro
         </section>
       )}
 
-      {/* Elegant Liquid Glass Footer with Support, Privacy, Contact & Theme Switcher */}
-      <footer className="relative z-10 border-t border-slate-900/[0.07] bg-white/40 py-10 backdrop-blur-xl dark:border-white/[0.07] dark:bg-white/[0.02]">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6">
-          <div className="flex flex-col items-center gap-1 sm:items-start">
-            <a href="/" className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#0D9488] to-[#4F46E5] text-white dark:from-[#2EF2C5] dark:to-[#7C6BFF] dark:text-[#05080F]">
-                <Activity className="h-4 w-4" />
-              </div>
-              <span className="text-sm font-bold text-slate-950 dark:text-white">
-                Health<span className="text-teal-600 dark:text-[#2EF2C5]">Tik</span>
-              </span>
-            </a>
-            <a
-              href={`mailto:${SUPPORT_EMAIL}`}
-              className="font-mono-tech text-[11px] text-slate-500 transition-colors hover:text-teal-600 dark:text-[#8A99B2] dark:hover:text-[#2EF2C5]"
-            >
-              {SUPPORT_EMAIL}
-            </a>
-          </div>
+      {/* Centered Site Footer matching healment.cend.in structure */}
+      <footer className="relative z-10 border-t border-slate-900/[0.08] bg-white/45 py-14 backdrop-blur-xl dark:border-white/[0.08] dark:bg-white/[0.02]">
+        <div className="mx-auto flex max-w-4xl flex-col items-center px-4 text-center sm:px-6">
+          {/* App Logo (56x56) */}
+          <a
+            href="/"
+            aria-label="HealthTik Home"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0D9488] to-[#4F46E5] shadow-[0_10px_28px_rgba(13,148,136,0.28)] transition-transform duration-200 hover:scale-105 dark:from-[#2EF2C5] dark:to-[#7C6BFF]"
+          >
+            <Activity className="h-7 w-7 text-white dark:text-[#05080F]" />
+          </a>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-medium text-slate-600 dark:text-[#8A99B2]">
+          {/* Copyright */}
+          <p className="mt-4 text-sm font-medium text-slate-600 dark:text-[#9BB0CB]">
+            © {new Date().getFullYear()} HealthTik. All rights reserved.
+          </p>
+
+          {/* Footer Navigation + Inline Theme Toggle Icon Button */}
+          <nav
+            aria-label="Footer"
+            className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 text-sm font-medium text-slate-600 dark:text-[#9BB0CB]"
+          >
             <a href="/#experience" className="transition-colors hover:text-slate-950 dark:hover:text-white">
               Features
             </a>
-            <a href="/support/" className="transition-colors hover:text-slate-950 dark:hover:text-white">
-              Support
+            <a href="/#health-map" className="transition-colors hover:text-slate-950 dark:hover:text-white">
+              Health Map
+            </a>
+            <a href="/#insights" className="transition-colors hover:text-slate-950 dark:hover:text-white">
+              Insights
             </a>
             <a href="/privacy/" className="transition-colors hover:text-slate-950 dark:hover:text-white">
               Privacy Policy
             </a>
+            <a href="/support/" className="transition-colors hover:text-slate-950 dark:hover:text-white">
+              Support
+            </a>
             <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${SUPPORT_EMAIL}`}
               className="transition-colors hover:text-slate-950 dark:hover:text-white"
             >
-              App Store
+              Contact
             </a>
-          </div>
-
-          {/* Segmented Liquid Glass Theme Switcher + Copyright */}
-          <div className="flex items-center gap-4">
-            <div
-              role="group"
-              aria-label="Theme preference"
-              className="glass-pill inline-flex items-center rounded-full p-1"
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Switch between dark and light colours"
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+              className="glass-pill inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-700 transition-transform duration-200 hover:scale-105 active:scale-95 dark:text-slate-200"
             >
-              <button
-                type="button"
-                onClick={() => setTheme('light')}
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold transition-all ${
-                  theme === 'light'
-                    ? 'bg-slate-950 text-white shadow-xs'
-                    : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-                }`}
-              >
-                <Sun className="h-3 w-3" />
-                Light
-              </button>
-              <button
-                type="button"
-                onClick={() => setTheme('dark')}
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold transition-all ${
-                  theme === 'dark'
-                    ? 'bg-white text-[#05080F] shadow-xs'
-                    : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-                }`}
-              >
-                <Moon className="h-3 w-3" />
-                Dark
-              </button>
-            </div>
+              {theme === 'light' ? (
+                <Moon className="h-4 w-4 text-indigo-600" />
+              ) : (
+                <Sun className="h-4 w-4 text-amber-300" />
+              )}
+            </button>
+          </nav>
 
-            <div className="font-mono-tech text-[11px] text-slate-400 dark:text-[#64748B]">
-              © {new Date().getFullYear()} HealthTik
-            </div>
-          </div>
+          {/* Author Credit & Links */}
+          <p className="mt-6 text-xs leading-relaxed text-slate-500 dark:text-[#8A99B2]">
+            HealthTik app &amp; website designed and developed by{' '}
+            <a
+              href="https://srikanth.nandiraju.com/"
+              target="_blank"
+              rel="noopener"
+              className="font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-teal-600 hover:decoration-teal-500 dark:text-slate-200 dark:decoration-white/20 dark:hover:text-[#2EF2C5]"
+            >
+              Srikanth Nandiraju
+            </a>{' '}
+            ·{' '}
+            <a
+              href="https://ai.nandiraju.com/"
+              target="_blank"
+              rel="noopener"
+              className="font-semibold text-slate-800 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-teal-600 hover:decoration-teal-500 dark:text-slate-200 dark:decoration-white/20 dark:hover:text-[#2EF2C5]"
+            >
+              Talk to the digital twin of Srikanth Nandiraju
+            </a>
+          </p>
         </div>
       </footer>
     </>
